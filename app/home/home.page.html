@@ -1,0 +1,92 @@
+<!-- src/app/home/home.page.html -->
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>📈 Stock Price Live 📊</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding page-content">
+  <ng-container *ngIf="favoriteStocks.length === 0; else stockList">
+    <div class="empty-message">
+      <ion-icon name="bookmark-outline" size="large"></ion-icon>
+      <p>No stocks in your watchlist yet.</p>
+    </div>
+  </ng-container>
+
+  <ng-template #stockList>
+    <ion-card *ngFor="let stock of stockData" class="stock-card">
+      <ion-card-header>
+        <ion-card-title class="stock-symbol">{{ stock.symbol }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="stock-info">
+          <p class="stock-price">${{ stock.price }}</p>
+          <p
+            class="stock-change"
+            [ngClass]="{ 'positive': stock.change >= 0, 'negative': stock.change < 0 }"
+          >
+            {{ stock.change >= 0 ? '▲' : '▼' }} {{ stock.change }}%
+          </p>
+        </div>
+
+        <div class="sparkline-container" *ngIf="stock.sparkline?.length">
+          <canvas
+            baseChart
+            [data]="getChartData(stock.sparkline)"
+            [options]="{
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: { legend: { display: false }, tooltip: { enabled: false } },
+              scales: { x: { display: false }, y: { display: false } }
+            }"
+            [type]="'line'"
+          ></canvas>
+        </div>
+
+        <div class="button-row">
+          <ion-button
+            color="primary"
+            shape="round"
+            (click)="goToChart(stock.symbol)"
+          >
+            View Chart
+          </ion-button>
+          <ion-button
+            fill="outline"
+            color="danger"
+            shape="round"
+            (click)="removeStock(stock.symbol)"
+          >
+            Remove
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button
+        fill="clear"
+        routerLink="/home"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <ion-icon name="home-outline"></ion-icon>
+        <ion-label>Home</ion-label>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" routerLink="/search" routerLinkActive="active">
+        <ion-icon name="search-outline"></ion-icon>
+        <ion-label>Search</ion-label>
+      </ion-button>
+      <ion-button fill="clear" routerLink="/settings" routerLinkActive="active">
+        <ion-icon name="settings-outline"></ion-icon>
+        <ion-label>Settings</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

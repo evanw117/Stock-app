@@ -1,0 +1,76 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 16px;
+  min-height: 100vh;
+}
+
+.segment-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 16px 0;
+
+  ion-segment {
+    width: 100%;
+    max-width: 360px;
+  }
+}
+
+.chart-container {
+  width: 100%;
+  max-width: 600px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+canvas {
+  width: 100% !important;
+  height: auto !important;
+}
+
+ion-toolbar {
+  --background: #ffffff;
+  --color: #222;
+  border-bottom: 1px solid #ddd;
+}
+
+ion-title {
+  font-size: 1.3rem;
+  font-weight: 500;
+  text-align: center;
+}
+:host {
+  display: block;
+}
+
+.chart-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+}
+
+ion-segment {
+  background-color: #f4f4f4;
+  border-radius: 8px;
+}
+
+.chart-wrapper {
+  height: 320px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chart-loading {
+  padding: 32px;
+  text-align: center;
+  font-size: 1.1rem;
+  color: #888;
+}

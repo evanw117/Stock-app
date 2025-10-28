@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Search Stocks</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Pull-to-Refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-down"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Search Bar -->
+  <ion-item>
+    <ion-input
+      [(ngModel)]="searchSymbol"
+      placeholder="Enter stock symbol"
+      (keyup.enter)="searchStock()">
+    </ion-input>
+    <ion-button (click)="searchStock()">Search</ion-button>
+  </ion-item>
+
+  <!-- Live Search Result -->
+  <div *ngIf="stockInfo" class="search-result">
+    <ion-card>
+      <ion-card-header class="ion-text-center">
+        <ion-card-title>{{ stockInfo.symbol }}</ion-card-title>
+        <ion-card-subtitle>
+          {{ stockInfo.price === 'N/A' ? 'Price unavailable' : (stockInfo.price | currency:'USD':'symbol':'1.2-2') }}
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-button expand="block" (click)="addToWatchlist()">
+          Add to Watchlist
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Default Eight Stocks -->
+  <div class="default-list">
+    <ion-spinner *ngIf="isLoadingDefaults" name="circles" class="ion-margin"></ion-spinner>
+    <div *ngIf="!isLoadingDefaults && defaultStocks.length === 0" class="ion-text-center ion-margin">
+      <p>No default stocks available. Pull to refresh.</p>
+    </div>
+    <ion-card *ngFor="let s of defaultStocks">
+      <ion-card-header class="ion-text-center">
+        <ion-card-title>{{ s.symbol }}</ion-card-title>
+        <ion-card-subtitle>
+          {{ s.price === 'N/A' ? 'Price unavailable' : (s.price | currency:'USD':'symbol':'1.2-2') }}
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-button expand="block" (click)="addToWatchlist(s.symbol)">
+          Add to Watchlist
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons class="nav-buttons">
+      <ion-button fill="clear" (click)="goToHome()">
+        <ion-icon name="home-outline"></ion-icon>
+        <ion-label>Home</ion-label>
+      </ion-button>
+      <ion-button fill="clear" (click)="goToSearch()" class="active">
+        <ion-icon name="search-outline"></ion-icon>
+        <ion-label>Search</ion-label>
+      </ion-button>
+      <ion-button fill="clear" (click)="goToSettings()">
+        <ion-icon name="settings-outline"></ion-icon>
+        <ion-label>Settings</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

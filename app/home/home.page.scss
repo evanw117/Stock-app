@@ -1,0 +1,172 @@
+
+:host {
+  display: block;
+  background: radial-gradient(circle at top left, #ffffff, #e0eafc 70%);
+  background-color: #a0b4eb;
+  padding: 16px;
+  
+  min-height: 100vh;
+  position: relative; 
+}
+
+ion-header {
+  --background: #f8f8f8;
+  border-bottom: 1px solid #ccc;
+}
+
+ion-title {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.stock-card:hover {
+  transform: translateY(-2px);
+}
+
+ion-card-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.stock-symbol {
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.stock-logo {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  object-fit: contain;
+}
+
+.stock-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.stock-price {
+  font-size: 1.1rem;
+  color: #222;
+}
+
+.stock-change {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1rem;
+}
+
+.positive {
+  color: #4caf50;
+}
+
+.negative {
+  color: #e53935;
+}
+
+.sparkline-container {
+  height: 40px;
+  margin: 10px 0 6px;
+  overflow: hidden;
+}
+
+.sparkline-container canvas {
+  max-height: 40px;
+  width: 100%;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+ion-button {
+  font-weight: 500;
+  border-radius: 20px;
+}
+
+.empty-message {
+  text-align: center;
+  margin-top: 60px;
+  color: #888;
+  font-size: 1rem;
+}
+
+.empty-message ion-icon {
+  font-size: 3rem;
+  color: #ccc;
+  margin-bottom: 10px;
+}
+
+ion-fab-button {
+  --border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+ion-footer {
+  --background: #fff;
+  border-top: 1px solid #ccc;
+  display: block !important;
+  visibility: visible !important;
+  min-height: 56px;
+ 
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  
+  z-index: 1000;
+}
+
+
+ion-content {
+  --padding-bottom: 56px; 
+  
+  position: relative;
+  min-height: calc(100vh - 56px - 56px); 
+}
+
+
+
+
+ion-content {
+  --padding-bottom: 56px;
+}
+
+
+ion-footer ion-button {
+  --padding-start: 8px;
+  --padding-end: 8px;
+  --min-width: unset;
+  color: var(--ion-color-primary);
+}
+
+
+ion-footer ion-button.active ion-icon,
+ion-footer ion-button.active ion-label {
+  color: var(--ion-color-primary);
+}
+
+
+ion-footer ion-icon {
+  font-size: 24px;
+}

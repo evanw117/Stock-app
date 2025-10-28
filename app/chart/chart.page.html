@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ stockSymbol }} Chart</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- Date Range Selection -->
+  <ion-segment [value]="selectedRange" (ionChange)="onRangeChange($event)">
+    <ion-segment-button value="1d">
+      <ion-label>1D</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="7d">
+      <ion-label>7D</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="1mo">
+      <ion-label>1M</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Chart Type Toggle -->
+  <ion-segment [value]="chartType" (ionChange)="onChartTypeChange($event)">
+    <ion-segment-button value="bar">
+      <ion-label>BAR</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="line">
+      <ion-label>LINE</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Chart Display -->
+  <div class="chart-wrapper" *ngIf="!isLoading && !apiError; else loadingTemplate">
+    <canvas baseChart
+            [type]="chartType"
+            [data]="chartData"
+            [options]="chartOptions">
+    </canvas>
+  </div>
+
+  <!-- Loading Spinner -->
+  <ng-template #loadingTemplate>
+    <div class="loading-container">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Loading chart data...</p>
+    </div>
+  </ng-template>
+
+  <!-- Error Message -->
+  <ion-card *ngIf="apiError && !isLoading" color="danger">
+    <ion-card-content>
+      <p>{{ apiError }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Stock Info Section -->
+  <div class="stock-info" *ngIf="stockDetails">
+    <h3>Stock Information</h3>
+    <p><strong>Current Price:</strong> {{ stockDetails.c }}</p>
+    <p><strong>Open:</strong> {{ stockDetails.o }}</p>
+    <p><strong>High:</strong> {{ stockDetails.h }}</p>
+    <p><strong>Low:</strong> {{ stockDetails.l }}</p>
+    <p><strong>Previous Close:</strong> {{ stockDetails.pc }}</p>
+  </div>
+
+</ion-content>
